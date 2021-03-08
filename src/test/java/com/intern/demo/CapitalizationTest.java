@@ -13,6 +13,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class CapitalizationTest {
 
+    @InjectMocks
+    Capitalization capitalization;
+
     @Before
     public void setUp(){
         initMocks(this);
@@ -33,13 +36,14 @@ public class CapitalizationTest {
 
         List<Book> inputs = Arrays.asList(importedBook1,importedBook2,importedBook3,importedBook4,localBook1,localBook2,localBook3,localBook4);
 
-        Map<String, List<String>> result = new HashMap<String, List<String>>(){{
-            put("Jane Stark", Arrays.asList("Local Book1", "Local Book2", "Local Book3", "Local Book4"));
+        Map<String, List<String>> result = capitalization.convertToMapTest(inputs);
+
+        Map<String, List<String>> expected = new HashMap<String, List<String>>(){{
+            put("Jane Stark", Arrays.asList("Local Book 1", "Local Book 2", "Local Book 3", "Local Book 4"));
             put("John Doe", Arrays.asList("Imported Book 1", "Imported Book 2", "Imported Book 3", "Imported Book 4"));
         }};
 //        assertNull(Capitalization.convertToMap();
-        assertEquals(result,inputs);
-
-
+        assertEquals(expected,result);
+        System.out.println("Output Secure");
     }
 }
